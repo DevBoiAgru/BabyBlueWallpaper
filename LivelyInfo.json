@@ -1,0 +1,14 @@
+{
+  "AppVersion": "0.6.9.0",
+  "Title": "Baby Bloo",
+  "Thumbnail": "assets/image.png",
+  "Preview": "",
+  "Desc": "baby blue wallpaper for all your baby blue needs",
+  "Author": "DevBoiAgru",
+  "License": null,
+  "Contact": null,
+  "Type": 1,
+  "FileName": "index.html",
+  "Arguments": "--audio --system-nowplaying",
+  "IsAbsolutePath": false
+}

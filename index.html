@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wolpapir</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <style>
+        @font-face {
+            font-family: 'FATfont';
+            src: url('assets/font.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body{
+            background-color: #A9BFFF;
+            background-image: linear-gradient(to right bottom, #a9bfff, #9eb8f2, #94b1e5, #8baad7, #91b4df);
+            font-family: "FATfont";
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            margin: 0%;
+            flex-direction: column;
+            position: absolute;
+        }
+        .mosiac{
+            background-image: url("Assets/M.png");
+            opacity: 0.7;
+            background-size: 6px;
+            background-position: 10px;
+            background-repeat: repeat;
+            width: 800px;
+            height: 169px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+        .herotext{
+            font-size: 9em;
+            color: #FFF;
+            position: absolute;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 0px 0px 5px white;
+        }
+        .timespacers{
+            margin: 20px;
+        }
+        .interactives{
+            background-color: #FFF0;
+            margin: 10px;
+            border: #FFF0;
+            filter: drop-shadow(0px 0px 3px #FFF);
+        }
+        .toolbar{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            width: 100%;
+            bottom: 260px;
+            position: absolute;
+        }
+        .btnimg{
+            width: 35px;
+            height: 35px;
+        }
+        #discord{
+            height: 32px;
+            width: 42px;
+        }
+        .Now{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.2em;
+            top: 300px;
+            color: white;
+            position: absolute;
+            text-shadow: 0px 0px 10px white;
+        }
+        .stuff{
+            display: flex;
+            flex-direction: column;
+            width: fit-content;
+        }
+        </style>
+    <script>
+        function GetQuote(){
+            let details = document.getElementById('player');
+            const settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": "https://corsproxy.io/?https://sussyworkshop.pythonanywhere.com/quote",
+                "method": "GET",
+                "headers": {
+                    "method": "muyewallpaper"
+                },
+                "processData": false,
+                "data": ""
+            };
+
+            $.ajax(settings).done(function (response) {
+                if (response.quote.length <= 77){
+                    details.innerHTML = response.quote + " - " + response.author;
+                }else{GetQuote()}
+            });
+        }
+
+        function startTime() {
+            const today = new Date();
+            let h = today.getHours();
+            let m = today.getMinutes();
+            let s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('h').innerHTML =  h;
+            document.getElementById('m').innerHTML =  m;
+            document.getElementById('s').innerHTML =  s;
+            setTimeout(startTime, 1000);
+        }
+        function checkTime(i) {
+            if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+            return i;
+        }
+        // Get now playing
+        function livelyCurrentTrack(data) {
+            startTime()
+            let obj = JSON.parse(data);
+
+            if (obj == null) {
+                // Nothing is playing
+                GetQuote();
+            }
+            else {
+                let details = document.getElementById('player');
+                song = obj.Title;
+                artist = obj.Artist;
+
+                details.innerHTML = "NOW PLAYING: " + song + " - " + artist;
+            }
+        }
+        
+    </script>
+<div class="mosiac">
+</div>
+<div class="Now" id="player"></div>
+    <div class="herotext">
+        <div id="h">00</div>
+        <div class="timespacers">:</div>
+        <div id="m">00</div>
+        <div class="timespacers">:</div>
+        <div id="s">00</div>
+    </div>
+    <div class="toolbar">
+        <button class ="interactives"><img class="btnimg" id="discord" src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6cc3c481a15a141738_icon_clyde_white_RGB.png"></button>
+        <button class ="interactives" id="insta" ><img class="btnimg" src="https://cdn.discordapp.com/attachments/723110558240342087/1170430921560838284/instagram_white_icon_free_logo_3570433.png"></button>
+        <button class ="interactives" id="X"><img class="btnimg" src="https://upload.wikimedia.org/wikipedia/commons/5/57/X_logo_2023_%28white%29.png"></button>
+    </div>
+
+
+</body>
+</html>
